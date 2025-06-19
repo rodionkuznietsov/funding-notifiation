@@ -1,7 +1,7 @@
 use reqwest::Error;
 use serde::Deserialize;
 
-const BOT_API: &str = "7583100162:AAFqgFdYaWS9KVwokayx85zb15FxUFZWKWI";
+const BOT_API: &str = "YOUR_API_KEY";
 const CHAT_ID: &str = "@fundingsrates";
 
 #[derive(Debug, Deserialize)]
