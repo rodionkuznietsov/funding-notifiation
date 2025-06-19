@@ -70,160 +70,153 @@ trait FundingParameter: std::fmt::Debug + Send + Sync {
 #[tokio::main]
 async fn main() {
     println!("Пары(а) с пороговым фандингом: {}%", THRESHOLD_RATE_FUNDING);
-
-    let start = Instant::now();
-
     search_funding_okx().await.unwrap();
-
-    let duration = start.elapsed();
-    println!("Время выполнения функции: {:.2?}", duration);
-
-    // search_funding().await;
+    search_funding().await;
 }
 
-// async fn search_funding() {
-//     loop {
-//         let (binx_result, 
-//             bybit_result, 
-//             mexc_result, 
-//             gate_result, 
-//             bitget_result,
-//             whitebit_result,
-//             bitmart_result,
-//             binance_result,
-//             coinex_result,
-//             kucoin_result,
-//             okx_result,
-//             htx_result,
-//             coinw_result,
-//             bitunix_result
-//         ) = tokio::join!(
-//             search_funding_binx(),
-//             search_funding_bybit(),
-//             search_funding_mexc(),
-//             search_funding_gate(),
-//             search_funding_bitget(),
-//             search_funding_whitebit(),
-//             search_funding_bitmart(),
-//             search_funding_binance(),
-//             search_funding_coinex(),
-//             search_funding_kucoin(),
-//             search_funding_okx(),
-//             search_funding_htx(),
-//             search_funding_coinw(),
-//             search_funding_bitunix()
-//         );
+async fn search_funding() {
+    loop {
+        let (binx_result, 
+            bybit_result, 
+            mexc_result, 
+            gate_result, 
+            bitget_result,
+            whitebit_result,
+            bitmart_result,
+            binance_result,
+            coinex_result,
+            kucoin_result,
+            okx_result,
+            htx_result,
+            coinw_result,
+            bitunix_result
+        ) = tokio::join!(
+            search_funding_binx(),
+            search_funding_bybit(),
+            search_funding_mexc(),
+            search_funding_gate(),
+            search_funding_bitget(),
+            search_funding_whitebit(),
+            search_funding_bitmart(),
+            search_funding_binance(),
+            search_funding_coinex(),
+            search_funding_kucoin(),
+            search_funding_okx(),
+            search_funding_htx(),
+            search_funding_coinw(),
+            search_funding_bitunix()
+        );
 
-//         if let (
-//             Ok(binx_data), 
-//             Ok(bybit_data), 
-//             Ok(mexc_data), 
-//             Ok(gate_data),
-//             Ok(bitget_data),
-//             Ok(whitebit_data),
-//             Ok(bitmart_data),
-//             Ok(binance_data),
-//             Ok(coinex_data),
-//             Ok(kucoin_data),
-//             Ok(okx_data),
-//             Ok(htx_data),
-//             Ok(coinw_data),
-//             Ok(bitunix_data)
-//         ) = (
-//             binx_result, 
-//             bybit_result, 
-//             mexc_result, 
-//             gate_result,
-//             bitget_result,
-//             whitebit_result,
-//             bitmart_result,
-//             binance_result,
-//             coinex_result,
-//             kucoin_result,
-//             okx_result,
-//             htx_result,
-//             coinw_result,
-//             bitunix_result
-//         ) {
-//             let binx_map: HashMap<String, FoundFundingBinX> = binx_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+        if let (
+            Ok(binx_data), 
+            Ok(bybit_data), 
+            Ok(mexc_data), 
+            Ok(gate_data),
+            Ok(bitget_data),
+            Ok(whitebit_data),
+            Ok(bitmart_data),
+            Ok(binance_data),
+            Ok(coinex_data),
+            Ok(kucoin_data),
+            Ok(okx_data),
+            Ok(htx_data),
+            Ok(coinw_data),
+            Ok(bitunix_data)
+        ) = (
+            binx_result, 
+            bybit_result, 
+            mexc_result, 
+            gate_result,
+            bitget_result,
+            whitebit_result,
+            bitmart_result,
+            binance_result,
+            coinex_result,
+            kucoin_result,
+            okx_result,
+            htx_result,
+            coinw_result,
+            bitunix_result
+        ) {
+            let binx_map: HashMap<String, FoundFundingBinX> = binx_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
             
-//             let bybit_map: HashMap<String, FoundFundingBybit> = bybit_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let bybit_map: HashMap<String, FoundFundingBybit> = bybit_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let mexc_map: HashMap<String, FoundFundingMexc> = mexc_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let mexc_map: HashMap<String, FoundFundingMexc> = mexc_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let gate_map: HashMap<String, FoundFundingGate> = gate_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let gate_map: HashMap<String, FoundFundingGate> = gate_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let bitget_map: HashMap<String, FoundFundingBitget> = bitget_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let bitget_map: HashMap<String, FoundFundingBitget> = bitget_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let whitebit_map: HashMap<String, FoundFundingWhiteBit> = whitebit_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let whitebit_map: HashMap<String, FoundFundingWhiteBit> = whitebit_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let bitmart_map: HashMap<String, FoundFundingBitMart> = bitmart_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let bitmart_map: HashMap<String, FoundFundingBitMart> = bitmart_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let binance_map: HashMap<String, FoundFundingBinance> = binance_data.into_iter() 
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let binance_map: HashMap<String, FoundFundingBinance> = binance_data.into_iter() 
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let coinex_map: HashMap<String, FoundFundingCoinex> = coinex_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let coinex_map: HashMap<String, FoundFundingCoinex> = coinex_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let kucoin_map: HashMap<String, FoundFundingKuCoin> = kucoin_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let kucoin_map: HashMap<String, FoundFundingKuCoin> = kucoin_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let okx_map: HashMap<String, FoundFundingOkx> = okx_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let okx_map: HashMap<String, FoundFundingOkx> = okx_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let htx_map: HashMap<String, FoundFundingHtx> = htx_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let htx_map: HashMap<String, FoundFundingHtx> = htx_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
             
-//             let coinw_map: HashMap<String, FoundFundingCoinW> = coinw_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let coinw_map: HashMap<String, FoundFundingCoinW> = coinw_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let bitunix_map: HashMap<String, FoundFundingBitunix> = bitunix_data.into_iter()
-//                 .map(|item| (item.symbol.clone(), item))
-//                 .collect();
+            let bitunix_map: HashMap<String, FoundFundingBitunix> = bitunix_data.into_iter()
+                .map(|item| (item.symbol.clone(), item))
+                .collect();
 
-//             let maps: Vec<MapType<'_>> = vec![
-//                 MapType::BinX(&binx_map),
-//                 MapType::Bitget(&bitget_map),
-//                 MapType::Bybit(&bybit_map),
-//                 MapType::Gate(&gate_map),
-//                 MapType::Mexc(&mexc_map),
-//                 MapType::WhiteBit(&whitebit_map),
-//                 MapType::BitMart(&bitmart_map),
-//                 MapType::Binance(&binance_map),
-//                 MapType::Coinex(&coinex_map),
-//                 MapType::KuCoin(&kucoin_map),
-//                 MapType::Okx(&okx_map),
-//                 MapType::Htx(&htx_map),
-//                 MapType::CoinW(&coinw_map),
-//                 MapType::Bitunix(&bitunix_map)
-//             ];
+            let maps: Vec<MapType<'_>> = vec![
+                MapType::BinX(&binx_map),
+                MapType::Bitget(&bitget_map),
+                MapType::Bybit(&bybit_map),
+                MapType::Gate(&gate_map),
+                MapType::Mexc(&mexc_map),
+                MapType::WhiteBit(&whitebit_map),
+                MapType::BitMart(&bitmart_map),
+                MapType::Binance(&binance_map),
+                MapType::Coinex(&coinex_map),
+                MapType::KuCoin(&kucoin_map),
+                MapType::Okx(&okx_map),
+                MapType::Htx(&htx_map),
+                MapType::CoinW(&coinw_map),
+                MapType::Bitunix(&bitunix_map)
+            ];
 
-//             collect_all_maps(maps).await;
+            collect_all_maps(maps).await;
 
-//             tokio::time::sleep(Duration::from_secs(2)).await;
-//         }
-//     }
-// }
+            tokio::time::sleep(Duration::from_secs(2)).await;
+        }
+    }
+}
 
 async fn collect_all_maps(maps: Vec<MapType<'_>>) { 
     let mut all: HashMap<String, Vec<Box<dyn FundingParameter>>> = HashMap::new();
