@@ -2,7 +2,7 @@ use reqwest::Error;
 use serde::Deserialize;
 
 const BOT_API: &str = "YOUR_API_KEY";
-const CHAT_ID: &str = "@fundingsrates";
+const CHAT_ID: &str = "@your_group_for_funding_rate";
 
 #[derive(Debug, Deserialize)]
 struct ApiResponse {
