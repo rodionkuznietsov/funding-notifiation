@@ -411,7 +411,7 @@ async fn collect_all_maps(maps: Vec<MapType<'_>>) {
 
         if (min_timeout <= 600) && (min_timeout > 30) || (max_timeout <= 600) && (max_timeout > 30) {
             let msg = format!(
-                "\n${}\n\n🏦 Биржы: {} / {}\n📈 Курсовой спред: {:.4}% ({}$ | {}$)\n⌛️ Спред фандинга: {:+.4}%, ({}% | {}%) \n🕗 Обновление фандинга: {} / {} \n⏰️ Время до перерасчета: {} / {}", 
+                "\n${}\n\n🏦 Exchanges: {} / {}\n📈 Exchange rate spread: {:.4}% ({}$ | {}$)\n⌛️ Funding Spread: {:+.4}%, ({}% | {}%) \n🕗 Funding Update: {} / {} \n⏰️ Time to recalculation: {} / {}", 
                 symbol, 
                 min_exchange_name, max_exchange_name,
                 price_spread, min_price, max_price,
@@ -437,10 +437,10 @@ async fn collect_all_maps(maps: Vec<MapType<'_>>) {
         let max_second_to_format_datetime = convert_to_normal_time(max_timeout);
 
         println!("\n${}\n", symbol);
-        println!("🏦 Биржы: {} / {}", min_exchange_name, max_exchange_name);
-        println!("📈 Курсовой спред: {:.4}% ({}$ | {}$)", price_spread, min_price, max_price);
-        println!("⌛️ Спред фандинга: {:.4}% ({}% | {}%)", rate_spread, min_rate, max_rate);
-        println!("🕗 Обновление фандинга: {}/{}", min_time, max_time);
-        println!("⏰️ Время до перерасчета: {} / {}", min_second_to_format_datetime, max_second_to_format_datetime);
+        println!("🏦 Exchanges: {} / {}", min_exchange_name, max_exchange_name);
+        println!("📈 Exchange rate spread: {:.4}% ({}$ | {}$)", price_spread, min_price, max_price);
+        println!("⌛️ Funding Spread: {:.4}% ({}% | {}%)", rate_spread, min_rate, max_rate);
+        println!("🕗 Funding Update: {}/{}", min_time, max_time);
+        println!("⏰️ Time to recalculation: {} / {}", min_second_to_format_datetime, max_second_to_format_datetime);
     }
 }
