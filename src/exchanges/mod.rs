@@ -1,0 +1,14 @@
+pub mod whitebit;
+pub mod binx;
+pub mod gate;
+pub mod bybit;
+pub mod mexc;
+pub mod bitget;
+pub mod bitmart;
+pub mod binance;
+pub mod coinex;
+pub mod kucoin;
+pub mod okx;
+pub mod htx;
+pub mod coinw;
+pub mod bitunix;
